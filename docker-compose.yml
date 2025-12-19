@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  image-compress-service:
+    build: .
+    container_name: image-compress-service-nodejs
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
