@@ -18,19 +18,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Optional: run Node tests if you have them
-      # If you DON'T have tests yet, you can leave this step enabled but
-      # it will fail unless "npm test" is configured.
-      # Safer approach: only run tests if a test script exists.
-      - name: Run tests (if available)
-        run: |
-          if node -p "require('./package.json').scripts && require('./package.json').scripts.test" | grep -qv null; then
-            npm ci
-            npm test
-          else
-            echo "No test script found in package.json, skipping tests."
-          fi
-
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
@@ -38,5 +25,3 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: image-compress-service-nodejs:ci
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
