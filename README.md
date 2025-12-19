@@ -74,6 +74,28 @@ docker build -t image-compress-service-nodejs:multistage .
 docker run --name imgzip -p 3000:3000 image-compress-service-nodejs:multistage
 ```
 
+## Bonus: Health Check Endpoint and Docker Healthcheck
+
+This project includes a **health check endpoint** and a **Docker healthcheck configuration** to monitor the application’s runtime status.
+
+A lightweight `/health` endpoint is implemented in the backend server to confirm that the application is running and responsive. Docker periodically calls this endpoint to verify the container’s health.
+
+By adding a healthcheck, this approach provides:
+
+- Automatic container health monitoring
+- Clear indication when the service is unavailable
+- Improved reliability and observability in containerized environments
+
+### Health Check Verification
+
+The health endpoint can be accessed [here](http://localhost:3000/health)
+
+A successful response returns:
+
+```json
+{ "status": "ok" }
+```
+
 ## Instructor Acknowledgement
 
 This project was developed as part of the **Operating Systems Laboratory** coursework.
