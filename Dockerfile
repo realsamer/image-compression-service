@@ -21,3 +21,6 @@ COPY public ./public
 
 EXPOSE 3000
 CMD ["npm", "start"]
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD wget --spider -q http://localhost:3000/health || exit 1
